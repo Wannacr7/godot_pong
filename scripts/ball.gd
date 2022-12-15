@@ -1,14 +1,26 @@
-extends RigidBody2D
+extends KinematicBody2D
 
 
-var dir = 1
-var velocity = 600
+var dir = Vector2.ONE
+var speed = 8
+var velocity : Vector2
+
 
 func _ready():
-	linear_velocity.x = velocity * dir
+	velocity = dir * speed
+	#linear_velocity.x = velocity * dir
 	
 func _physics_process(delta):
-	linear_velocity.x = velocity * dir
+	
+	var collision = move_and_collide(velocity)
+	if(collision):
+		velocity = velocity.bounce(collision.normal)
+		
+
+		
+
+	
+	
 
 
 
